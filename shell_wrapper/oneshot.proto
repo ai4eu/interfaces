@@ -1,0 +1,96 @@
+// Interface for Acumos AI4EU Component
+// 
+// Author: Peter Schüller <peter.schueller@tuwien.ac.at>, TU Wien
+//
+// see ShellWrapperOneshot.md
+//
+syntax = "proto3";
+package shell_wrapper;
+
+// main entry point
+service ShellComponentService {
+  rpc Run (RunRequest) returns (RunResponse);
+}
+
+message RunRequest {
+  // this includes all files and, if required, '--' in between parameters
+  // parameters will not be subject to shell execution, they will be passed 1--1 to the tool
+  repeated string command_line_parameter = 1;
+
+  // what to send to the tool via stdin
+  // if this is not given, stdin is not provided to the tool
+  // no re-encoding is done, this is directly sent
+  optional bytes stdin = 2;
+
+  // which files shall be created prior to executing the tool
+  // all files will be created in an empty directory files/ relative to the tool's working directory
+  // files that are modified by the tool can be retrieved using output_file
+  // the key of the map is just an identifier for the file in case of errors
+  map<string, FileLocation> input_files = 3;
+
+  // which files shall be harvested after execution and sent back to the caller in the response
+  // the key of the map is an identifier for the file in the ToolResponse
+  // if a file is not found, that is not an error
+  // file locations can contain wildcards, see below
+  map<string, FileLocation> output_files = 4;
+
+  // whether to collect stdout and send back in the response
+  // if not given, the default is true
+  optional bool obtain_stdout = 5;
+
+  // whether to collect stderr and send back in the response
+  // if not given, the default is true
+  optional bool obtain_stderr = 6;
+
+  // whether to combine stdout and stderr and return them as stdout
+  // if not given, the default is false
+  optional bool combine_stdout_stderr = 7;
+}
+
+message FileLocation {
+  // name of the file
+  // * means wildcard
+  string filename = 1;
+
+  // relative path to the file within files/
+  // empty means files/<filename>
+  // * in one path element means wildcard (as in .gitignore)
+  // ** in one path element means arbitrary-depth wildcard (as in .gitignore)
+  repeated string path = 1;
+}
+
+message RunResponse {
+  // true if the tool was called, otherwise false
+  bool success = 1;
+
+  // a description of the error, if success == false
+  optional string request_error = 2;
+
+  // the result of running the tool, if success == true
+  optional ToolResponse tool_response = 3;
+}
+
+message ToolResponse {
+  // the exit code of the tool
+  int exitcode = 1;
+
+  // stdout of the tool, if requested
+  optional bytes stdout = 2;
+
+  // stderr of the tool, if requested
+  optional bytes stderr = 3;
+
+  // contents of output files, organized by the key given in the request
+  repeated FileContent output_files = 4;
+}
+
+message FileContent {
+  // what was the key of the FileLocation in RunRequest.output_files
+  string key = 1;
+
+  // content of the file, or not set if the file was not found
+  optional bytes content = 2;
+
+  // where was the file found
+  optional FileLocation location = 3;
+}
