@@ -25,9 +25,8 @@ This repository is currently managed by Peter Schueller <peter.schueller@tuwien.
 # Action items
 
 * TODO draft interface for the use case "Explanations for Black-box Predictors"
-* TODO draft interface for "Generic Shell Execution Wrapper"
 * MAYBE setup automatic verification of interface syntax with Travis or similar
 
 # Interfaces
 
-TODO
+* Generic Shell Execution Wrapper [./shell_wrapper/shell_wrapper.md]
