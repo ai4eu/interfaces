@@ -15,12 +15,12 @@ This repository is currently managed by Peter Schueller <peter.schueller@tuwien.
 # How to contribute
 
 * Make a branch for your suggested new interface or for your suggested interface change.
-* Do not forget to add you to the list of authors and to add your interface to README.md.
+* Do not forget to add your interface to the list at the end of this file ([README.md]).
 * Create a Pull Request against master and suggest at least one reviewer.
 * If you are a member of the consortium and have merge permissions for this repository, depending on the situation you might merge the Pull Request yourself.
 
   - Lack of criticism and lack of reactions to your Pull Request for a few days could be a good reason to publish the content instead of waiting.
-  - Please respect others.
+  - Please be respectful of other opinions.
 
 # Action items
 
@@ -28,6 +28,6 @@ This repository is currently managed by Peter Schueller <peter.schueller@tuwien.
 * TODO draft interface for "Generic Shell Execution Wrapper"
 * MAYBE setup automatic verification of interface syntax with Travis or similar
 
-# Interfaces and Authors
+# Interfaces
 
 TODO
