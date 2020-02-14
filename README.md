@@ -15,7 +15,7 @@ This repository is currently managed by Peter Schueller <peter.schueller@tuwien.
 # How to contribute
 
 * Make a branch for your suggested new interface or for your suggested interface change.
-* Do not forget to add your interface to the list at the end of this file ([README.md]).
+* Do not forget to add your interface to the list at the end of this file [Readme.md](https://github.com/ai4eu/interfaces/edit/master/README.md).
 * Create a Pull Request against master and suggest at least one reviewer.
 * If you are a member of the consortium and have merge permissions for this repository, depending on the situation you might merge the Pull Request yourself.
 
