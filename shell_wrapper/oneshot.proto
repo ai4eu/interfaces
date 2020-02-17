@@ -20,7 +20,7 @@ message RunRequest {
   // what to send to the tool via stdin
   // if this is not given, stdin is not provided to the tool
   // no re-encoding is done, this is directly sent
-  optional bytes stdin = 2;
+  bytes stdin = 2;
 
   // which files shall be created prior to executing the tool
   // all files will be created in an empty directory files/ relative to the tool's working directory
@@ -36,15 +36,15 @@ message RunRequest {
 
   // whether to collect stdout and send back in the response
   // if not given, the default is true
-  optional bool obtain_stdout = 5;
+  bool obtain_stdout = 5;
 
   // whether to collect stderr and send back in the response
   // if not given, the default is true
-  optional bool obtain_stderr = 6;
+  bool obtain_stderr = 6;
 
   // whether to combine stdout and stderr and return them as stdout
   // if not given, the default is false
-  optional bool combine_stdout_stderr = 7;
+  bool combine_stdout_stderr = 7;
 }
 
 message FileLocation {
@@ -56,7 +56,7 @@ message FileLocation {
   // empty means files/<filename>
   // * in one path element means wildcard (as in .gitignore)
   // ** in one path element means arbitrary-depth wildcard (as in .gitignore)
-  repeated string path = 1;
+  repeated string path = 2;
 }
 
 message RunResponse {
@@ -64,10 +64,10 @@ message RunResponse {
   bool success = 1;
 
   // a description of the error, if success == false
-  optional string request_error = 2;
+  string request_error = 2;
 
   // the result of running the tool, if success == true
-  optional ToolResponse tool_response = 3;
+  ToolResponse tool_response = 3;
 }
 
 message ToolResponse {
@@ -75,10 +75,10 @@ message ToolResponse {
   int32 exitcode = 1;
 
   // stdout of the tool, if requested
-  optional bytes stdout = 2;
+  bytes stdout = 2;
 
   // stderr of the tool, if requested
-  optional bytes stderr = 3;
+  bytes stderr = 3;
 
   // contents of output files, organized by the key given in the request
   repeated FileContent output_files = 4;
@@ -89,8 +89,8 @@ message FileContent {
   string key = 1;
 
   // content of the file, or not set if the file was not found
-  optional bytes content = 2;
+  bytes content = 2;
 
   // where was the file found
-  optional FileLocation location = 3;
+  FileLocation location = 3;
 }
