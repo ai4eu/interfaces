@@ -8,7 +8,7 @@ syntax = "proto3";
 package shell_wrapper;
 
 // main entry point
-service ShellComponentService {
+service ShellComponent {
   rpc Run (RunRequest) returns (RunResponse);
 }
 
