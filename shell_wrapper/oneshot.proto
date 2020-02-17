@@ -45,6 +45,10 @@ message RunRequest {
   // whether to combine stdout and stderr and return them as stdout
   // if not given, the default is false
   bool combine_stdout_stderr = 7;
+
+  // how long to wait for termination before killing the tool (in seconds)
+  // 0 does not mean infinity!
+  int32 timeout = 8;
 }
 
 message FileLocation {
