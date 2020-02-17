@@ -72,7 +72,7 @@ message RunResponse {
 
 message ToolResponse {
   // the exit code of the tool
-  int exitcode = 1;
+  int32 exitcode = 1;
 
   // stdout of the tool, if requested
   optional bytes stdout = 2;
