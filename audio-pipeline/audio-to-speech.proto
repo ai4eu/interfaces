@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message AudioSegment {
+  string job_uuid = 1;
+  string segment_uuid = 2;
+  string segment_file = 3;
+  string work_dir = 4;
+  int64 index = 5;
+  int64 length = 6;
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+message SegmentText {
+  AudioSegment segment = 1;
+  string text = 2;
+  string language = 3;
+}	
+
+service AudioToSpeech {
+  rpc textToSpeech(AudioSegment) returns(SegmentText);
+}
+

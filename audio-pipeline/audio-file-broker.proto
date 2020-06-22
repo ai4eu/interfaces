@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+message AudioFileRequest {
+  string filter = 1;
+  int64 priority = 2;
+}
+
+
+message AudioFileJob {
+  string job_uuid = 1;
+  int64 priority = 2;
+  string file_name = 3;
+  string work_dir = 4;
+  int64 length = 5;
+}
+
+service AudioFileBroker {
+  rpc getAudioFileJob(AudioFileRequest) returns(AudioFileJob);
+}
+

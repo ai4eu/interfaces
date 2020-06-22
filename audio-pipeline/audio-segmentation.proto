@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+message AudioFileJob {
+  string job_uuid = 1;
+  int64 priority = 2;
+  string file_name = 3;
+  string work_dir = 4;
+  int64 length = 5;
+}
+
+message AudioSegment {
+  string job_uuid = 1;
+  string segment_uuid = 2;
+  string segment_file = 3;
+  string work_dir = 4;
+  int64 index = 5;
+  int64 length = 6;
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+
+service AudioSegmentation {
+  rpc getNextAudioSegment(AudioFileJob) returns(AudioSegment);
+}
+
