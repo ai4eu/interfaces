@@ -1,0 +1,15 @@
+// model-category: datasource, toolkit-type: h2o
+syntax = "proto3";
+package au4eu.infrastructure.storage;
+
+message VolumeInfo {
+    string volume_path = 1;
+}
+
+message ANY {
+}
+
+service PersistentVolumeProvider {
+  rpc mountVolume(VolumeInfo) returns(ANY);
+}
+

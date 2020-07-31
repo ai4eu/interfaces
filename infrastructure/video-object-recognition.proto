@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message VideoSegment {
+  string job_uuid = 1;
+  string segment_uuid = 2;
+  string segment_file = 3;
+  string work_dir = 4;
+  int64 index = 5;
+  int64 length = 6;
+  int64 start_time = 7;
+  int64 end_time = 8;
+  int64 total_segements = 9;
+}
+
+message VideoObjectList {
+  VideoSegment segment = 1;
+  repeated string object_name = 2;
+  repeated object_uuid = 3;
+}
+
+// model initializer
+message ConfigRequest {
+  string model_id = 1;
+}
+
+message ConfigValue {
+    string name = 1;
+    String value = 2;
+}
+
+message ConfigResponse {
+    repeated ConfigValue = 1;
+}
+
+service VideoObjectRecognition {
+  rpc classifyObjects(VideoSegment) returns(VideoObjectList);
+  rpc setConfig(ConfigResponse) returns(ConfigResponse);
+}
+

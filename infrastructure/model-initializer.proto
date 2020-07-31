@@ -1,0 +1,21 @@
+// model-category: datasource, toolkit-type: databroker
+syntax = "proto3";
+package au4eu.infrastructure.configuration;
+
+message ConfigRequest {
+  string model_id = 1;
+}
+
+message ConfigValue {
+    string name = 1;
+    String value = 2;
+}
+
+message ConfigResponse {
+    repeated ConfigValue = 1;
+}
+
+service ModelInitializer {
+  rpc getConfig(ConfigRequest) returns(ConfigResponse);
+}
+

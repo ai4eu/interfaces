@@ -1,0 +1,14 @@
+// model-category: datasource, toolkit-type: tensorflow
+syntax = "proto3";
+package au4eu.diagnosis.tensorflow;
+
+message LogfileLocation {
+    string logfile_path = 1;
+}
+
+message ANY {
+}
+
+service TensorboardConnector {
+  rpc connectTensorboard(LogfileLocation) returns(ANY);
+}
