@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+message Program {
+  // ASP Core-2 program
+  string program = 1;
+}
+
+message Parameters {
+  int number_of_answers = 1;
+  bool return_only_optimal_answers = 2;
+}
+
+message CostElement {
+  int level = 1;
+  int cost = 2;
+}
+
+message Answerset {
+  repeated string atoms = 1;
+  repeated CostElement costs = 2;
+  bool is_known_optimal = 3;
+}
+
+message Answersets {
+  repeated Answerset answer = 1;
+}
+
+message OptionalAnswerset {
+  Answerset answerset = 1;
+}
+
+message SolverJob {
+  string job_uuid = 1;
+}
+
+service ProgramCombiner {
+  rpc concatenatePrograms(Program, Program) returns (Program);
+}
+
+service OneshotSolver {
+    rpc solve(Program, Parameters) returns (Answersets);
+}
+
+service StreamingSolver {
+    rpc startSolverJob(Program, Parameters) returns (SolverJob);
+    rpc getNextAnswerSet(SolverJob) returns (OptionalAnswerset);
+}
