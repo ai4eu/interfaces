@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+message Program {
+  // HEX Program (ASP Core-2 + HEX atoms)
+  string program = 1;
+}
+
+message PluginWithParameters {
+  string plugin_name = 1;
+  repeated string parameters = 2;
+}
+
+message Parameters {
+  int number_of_answers = 1;
+  bool return_only_optimal_answers = 2;
+  repeated PluginWithParameters plugins = 3;
+}
+
+message CostElement {
+  int level = 1;
+  int cost = 2;
+}
+
+message Answerset {
+  repeated string atoms = 1;
+  repeated CostElement costs = 2;
+  bool is_known_optimal = 3;
+}
+
+message SolverJob {
+  string job_uuid = 1;
+}
+
+message ResultDescription {
+  bool success = 1;
+  int code = 2;
+  repeated string messages = 3;
+}
+
+message SolveResultAnswersets {
+  ResultDescription description = 1;
+  repeated Answerset answers = 2;
+}
+
+message SolveResultOptionalAnswerset {
+  ResultDescription description = 1;
+  Answerset answer = 2;
+}
+
+service ProgramCombiner {
+  rpc concatenatePrograms(Program, Program) returns (Program);
+}
+
+service OneshotSolver {
+  rpc solve(Program, Parameters) returns (SolveResultAnswersets);
+}
+
+service StreamingSolver {
+  rpc startSolverJob(Program, Parameters) returns (SolverJob);
+  rpc getNextAnswerSet(SolverJob) returns (SolveResultOptionalAnswerset);
+}
