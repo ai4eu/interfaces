@@ -15,7 +15,7 @@ message VideoFileJob {
   string format = 6;
 }
 
-// model initializer
+// infrastructure interface
 message ConfigRequest {
   string model_id = 1;
 }

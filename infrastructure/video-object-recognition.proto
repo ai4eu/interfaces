@@ -18,7 +18,7 @@ message VideoObjectList {
   repeated object_uuid = 3;
 }
 
-// model initializer
+// infrastructure interface
 message ConfigRequest {
   string model_id = 1;
 }

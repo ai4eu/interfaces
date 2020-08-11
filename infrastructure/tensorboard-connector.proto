@@ -1,14 +1,20 @@
-// model-category: datasource, toolkit-type: tensorflow
+// model-category: datasource, toolkit-type: Databroker
 syntax = "proto3";
-package au4eu.diagnosis.tensorflow;
+package au4eu.infrastructure.diagnosis;
 
-message LogfileLocation {
-    string logfile_path = 1;
+message ConfigRequest {
+  string model_id = 1;
 }
 
-message ANY {
+message ConfigValue {
+    string name = 1;
+    String value = 2;
 }
 
-service TensorboardConnector {
-  rpc connectTensorboard(LogfileLocation) returns(ANY);
+message ConfigResponse {
+    repeated ConfigValue = 1;
+}
+
+service TensorBoardConnector {
+  rpc getConfig(ConfigRequest) returns(ConfigResponse);
 }

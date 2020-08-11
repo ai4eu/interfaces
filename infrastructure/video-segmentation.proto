@@ -21,7 +21,7 @@ message VideoSegment {
   int64 total_segements = 9;
 }
 
-// model initializer
+// infrastructure interface
 message ConfigRequest {
   string model_id = 1;
 }

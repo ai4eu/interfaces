@@ -1,4 +1,4 @@
-// model-category: datasource, toolkit-type: databroker
+// model-category: datasource, toolkit-type: Databroker
 syntax = "proto3";
 package au4eu.infrastructure.configuration;
 
