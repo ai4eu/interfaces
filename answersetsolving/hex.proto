@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-message Program {
-  // HEX Program (ASP Core-2 + HEX atoms)
-  string program = 1;
+message Parameters {
+  int number_of_answers = 1;
+  bool return_only_optimal_answers = 2;
 }
 
 message PluginWithParameters {
@@ -10,9 +10,10 @@ message PluginWithParameters {
   repeated string parameters = 2;
 }
 
-message Parameters {
-  int number_of_answers = 1;
-  bool return_only_optimal_answers = 2;
+message SolverJob {
+  // ASP Core-2 program
+  string program = 1;
+  Parameters parameters = 2;
   repeated PluginWithParameters plugins = 3;
 }
 
@@ -27,27 +28,17 @@ message Answerset {
   bool is_known_optimal = 3;
 }
 
-message Answersets {
-  repeated Answerset answer = 1;
+message ResultDescription {
+  bool success = 1;
+  int code = 2;
+  repeated string messages = 3;
 }
 
-message OptionalAnswerset {
-  Answerset answerset = 1;
-}
-
-message SolverJob {
-  string job_uuid = 1;
-}
-
-service ProgramCombiner {
-  rpc concatenatePrograms(Program, Program) returns (Program);
+message SolveResultAnswersets {
+  ResultDescription description = 1;
+  repeated Answerset answers = 2;
 }
 
 service OneshotSolver {
-  rpc solve(Program, Parameters) returns (Answersets);
-}
-
-service StreamingSolver {
-  rpc startSolverJob(Program, Parameters) returns (SolverJob);
-  rpc getNextAnswerSet(SolverJob) returns (OptionalAnswerset);
+    rpc solve(SolverJob) returns (SolveResultAnswersets);
 }
