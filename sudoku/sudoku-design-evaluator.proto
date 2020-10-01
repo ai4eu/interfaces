@@ -55,10 +55,7 @@ message SolveResultAnswersets {
   repeated Answerset answers = 2;
 }
 
-service SudokuDesignEvaluationProblemEncoder {
+service SudokuDesignEvaluationComponent {
   rpc evaluateSudokuDesign(SudokuDesignEvaluationJob) returns SolverJob;
-}
-
-service SudokuDesignEvaluationResultDecoder {
-  rpc processEvaluationResult(SolveResultAnswersets) returns(SudokuDesignEvaluationResult);
+  rpc processSolverResult(SolveResultAnswersets) returns(SudokuDesignEvaluationResult);
 }

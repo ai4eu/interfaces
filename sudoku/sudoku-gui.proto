@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-message SudokuDesignEvaluationRequest {
+message WaitConfiguration {
   int64 version = 1;
 }
 
@@ -29,10 +29,7 @@ message Empty {
   int64 empty = 1;
 }
 
-service SudokuDesignEvaluationRequestDataBroker {
-  rpc requestSudokuEvaluation(SudokuDesignEvaluationRequest) returns(SudokuDesignEvaluationJob);
-}
-
-service SudokuDesignEvaluationResultProcessor {
+service SudokuDesignEvaluationGUI {
+  rpc waitForSudokuEvaluationJob(WaitConfiguration) returns(SudokuDesignEvaluationJob);
   rpc processEvaluationResult(SudokuDesignEvaluationResult) returns(Empty);
 }
