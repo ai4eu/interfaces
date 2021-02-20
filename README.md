@@ -32,3 +32,4 @@ This repository is currently managed by Peter Schueller <peter.schueller@tuwien.
 * Generic Shell Execution Wrapper [./shell_wrapper/shell_wrapper.md]
 * Interfaces of the tutorials
 * Interfaces of the example Audio-Mining-Pipeline
+* Interfaces to three PDDL planners
