@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 message AudioFileRequest {
-  string filter = 1;
+  string work_dir = 1;
   int64 priority = 2;
 }
 
