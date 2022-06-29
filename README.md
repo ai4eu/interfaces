@@ -1,5 +1,7 @@
 # Overview
 
+This repository has been moved to https://gitlab.eclipse.org/eclipse/graphene/ai-interfaces
+
 This repository collects common interfaces between AI4EU Acumos components in the AI4EU resources catalog.
 
 * The main aim here is to collect and document interfaces.
